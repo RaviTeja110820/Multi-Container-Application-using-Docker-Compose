@@ -27,6 +27,60 @@ docker-voting-app/
 └── docker-compose.yml
 ```
 
+# Architecture
+
+![Architecture](Architecture.png)
+
+
+```
+                User
+                  │
+                  ▼
+          Vote App (Flask)
+                  │
+                  ▼
+             Redis Queue
+                  │
+                  ▼
+          Worker (.NET)
+                  │
+                  ▼
+        PostgreSQL Database
+                  │
+                  ▼
+        Result App (Node.js)
+```
+
+# Workflow
+
+```
+Application Source Code
+        │
+        ▼
+Create Dockerfiles
+        │
+        ▼
+Create docker-compose.yml
+        │
+        ▼
+docker compose build
+        │
+        ▼
+docker compose up
+        │
+        ▼
+Docker Creates Network
+        │
+        ▼
+Redis + PostgreSQL
+        │
+        ▼
+Vote App + Worker + Result App
+        │
+        ▼
+Application Accessible
+```
+
 ---
 
 # What is Docker Compose?
